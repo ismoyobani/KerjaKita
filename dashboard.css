@@ -486,3 +486,10 @@ button:disabled {
         flex: 1;
     }
 }
+
+/* Pastikan elemen beratribut hidden tetap tersembunyi. */
+[hidden] { display: none !important; }
+.dashboard-form input, .dashboard-form select, .dashboard-form textarea { max-width: 100%; }
+.dashboard-form button:focus-visible, .dashboard-nav button:focus-visible,
+.job-management-actions button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+@media (max-width: 900px) { .search-box { grid-template-columns: 1fr; } }
