@@ -661,7 +661,28 @@ document.addEventListener("DOMContentLoaded", () => {
         renderJobs(filteredJobs);
     }
 
-    // Memuat lowongan aktif dan melakukan Full-Text Search di PostgreSQL.
+    // Isi opsi kategori dari database. Kegagalan kategori tidak memblokir lowongan.
+    async function loadCategoryOptions() {
+        if (!categoryFilter) return;
+        try {
+            const { data, error } = await supabaseClient.from("categories").select("name").order("name", { ascending: true });
+            if (error) throw error;
+            const selected = categoryFilter.value;
+            categoryFilter.innerHTML = '<option value="">Semua Kategori</option>';
+            (data || []).forEach((category) => {
+                if (!category.name) return;
+                const option = document.createElement("option");
+                option.value = category.name.toLowerCase();
+                option.textContent = category.name;
+                categoryFilter.appendChild(option);
+            });
+            categoryFilter.value = selected;
+        } catch (error) {
+            console.warn("Filter kategori tidak dapat dimuat:", error.message);
+        }
+    }
+
+    // Memuat lowongan; gunakan pencarian biasa jika kolom search_vector belum tersedia.
     async function loadPublicJobs() {
         const container = getJobsContainer();
 
@@ -716,10 +737,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            const { data, error } = await query;
+            let { data, error } = await query;
+
+            if (error && keyword && /search_vector|column.*does not exist|42703/i.test(
+                [error.message, error.details, error.hint, error.code].filter(Boolean).join(" ")
+            )) {
+                const pattern = keyword.replace(/[,%()]/g, " ").trim();
+                if (pattern) {
+                    const fallback = await supabaseClient.from("jobs")
+                        .select(`id, title, description, location, job_type, workplace_type,
+                            salary_min, salary_max, requirements, responsibilities, created_at,
+                            companies (company_name, location, logo_url), categories (name)`)
+                        .eq("is_active", true)
+                        .or(`title.ilike.%${pattern}%,description.ilike.%${pattern}%,location.ilike.%${pattern}%`)
+                        .order("created_at", { ascending: false });
+                    data = fallback.data;
+                    error = fallback.error;
+                }
+            }
 
             if (error) throw error;
-
             publicJobs = data || [];
             applyJobFilters();
         } catch (error) {
@@ -824,5 +861,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createJobModal();
     initializeApp();
+    loadCategoryOptions();
     loadPublicJobs();
 });
