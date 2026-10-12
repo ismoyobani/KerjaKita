@@ -1,64 +1,122 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f172a">
-    <meta name="description" content="Dashboard KerjaKita untuk mengelola profil dan aktivitas pencarian kerja.">
-    <title>Dashboard | KerjaKita</title>
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Dashboard KerjaKita untuk mengelola lowongan dan lamaran kerja.">
+  <title>Dashboard | KerjaKita</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <header class="dashboard-nav">
-        <a href="index.html" class="brand">Kerja<span>Kita</span></a>
+  <header class="dashboard-nav">
+    <a href="index.html" class="brand">Kerja<span>Kita</span></a>
+    <div class="nav-actions">
+      <span id="userName">Memuat akun...</span>
+      <button id="logoutBtn" class="btn btn-outline" type="button">Logout</button>
+    </div>
+  </header>
 
-        <div class="nav-actions">
-            <span id="userName">Memuat akun...</span>
-            <button id="logoutBtn" class="btn btn-outline" type="button">
-                Logout
-            </button>
-        </div>
-    </header>
+  <main class="dashboard-container">
+    <section class="welcome">
+      <p class="eyebrow">DASHBOARD KERJAKITA</p>
+      <h1 id="welcomeTitle">Memuat dashboard...</h1>
+      <p id="welcomeDescription">Kelola aktivitas akun KerjaKita dari satu tempat.</p>
+    </section>
+    <div id="dashboardMessage" class="message" role="status" aria-live="polite" hidden></div>
 
-    <main class="dashboard-container">
-        <section class="welcome">
-            <p class="eyebrow">DASHBOARD KERJAKITA</p>
-            <h1 id="welcomeTitle">Memuat dashboard...</h1>
-            <p id="welcomeDescription">
-                Sedang mengambil data akun Anda.
-            </p>
-        </section>
+    <section class="profile-card">
+      <div class="avatar" id="userInitial" aria-hidden="true">K</div>
+      <div>
+        <h2 id="profileName">Memuat profil...</h2>
+        <p id="profileEmail">-</p>
+        <span id="profileRole" class="role-badge">-</span>
+      </div>
+    </section>
 
-        <div id="dashboardMessage" class="message" role="status" aria-live="polite" hidden></div>
+    <section id="seekerSection" class="dashboard-section" hidden>
+      <h2 class="section-title">Ringkasan lamaran</h2>
+      <div class="dashboard-grid">
+        <article class="menu-card"><span class="menu-icon">📨</span><h3 id="totalApplications">0</h3><p>Total lamaran</p></article>
+        <article class="menu-card"><span class="menu-icon">⏳</span><h3 id="pendingApplications">0</h3><p>Menunggu / ditinjau</p></article>
+        <article class="menu-card"><span class="menu-icon">✅</span><h3 id="acceptedApplications">0</h3><p>Diterima</p></article>
+        <article class="menu-card"><span class="menu-icon">❌</span><h3 id="rejectedApplications">0</h3><p>Ditolak</p></article>
+      </div>
+      <h2 class="list-heading">Riwayat lamaran</h2>
+      <div id="applicationsList" class="jobs-list"></div>
+      <a href="index.html#lowongan" class="btn btn-primary" style="margin-top:18px">Cari lowongan</a>
+    </section>
 
-        <section class="profile-card">
-            <div class="avatar" id="userInitial" aria-hidden="true">K</div>
-            <div>
-                <h2 id="profileName">Memuat profil...</h2>
-                <p id="profileEmail">-</p>
-                <span id="profileRole" class="role-badge">-</span>
-            </div>
-        </section>
+    <section id="recruiterSection" class="dashboard-section" hidden>
+      <h2 class="section-title">Dashboard perekrut</h2>
+      <div class="dashboard-grid">
+        <article class="menu-card"><span class="menu-icon">💼</span><h3 id="totalJobs">0</h3><p>Total lowongan</p></article>
+        <article class="menu-card"><span class="menu-icon">🟢</span><h3 id="activeJobs">0</h3><p>Lowongan aktif</p></article>
+        <article class="menu-card"><span class="menu-icon">👥</span><h3 id="totalApplicants">0</h3><p>Total lamaran masuk</p></article>
+        <article class="menu-card"><span class="menu-icon">⏳</span><h3 id="recruiterPendingApplications">0</h3><p>Perlu ditinjau</p></article>
+      </div>
 
-        <section aria-labelledby="menuTitle">
-            <h2 class="section-title" id="menuTitle">Menu utama</h2>
-            <div id="dashboardMenu" class="dashboard-grid"></div>
-        </section>
+      <section class="dashboard-section" id="companySection">
+        <h2 class="list-heading">Profil perusahaan</h2>
+        <form id="companyForm" class="dashboard-form">
+          <h3>Tambah perusahaan</h3>
+          <label for="companyName">Nama perusahaan *</label>
+          <input id="companyName" name="company_name" required maxlength="150" placeholder="Contoh: PT Teknologi Nusantara">
+          <div class="form-row">
+            <div><label for="companyLocation">Lokasi</label><input id="companyLocation" name="location" maxlength="150" placeholder="Surakarta, Jawa Tengah"></div>
+            <div><label for="companyLogo">URL logo (opsional)</label><input id="companyLogo" name="logo_url" type="url" maxlength="1000" placeholder="https://..."></div>
+          </div>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Simpan perusahaan</button></div>
+          <p class="section-note">Jika perusahaan sudah ada, perusahaan tersebut akan ditampilkan di daftar di bawah.</p>
+        </form>
+        <div id="companiesList" class="jobs-list"></div>
+      </section>
 
-        <a href="index.html" class="back-link">
-            &larr; Kembali ke halaman utama
-        </a>
-    </main>
+      <section class="dashboard-section" id="jobsSection">
+        <h2 class="list-heading">Buat lowongan</h2>
+        <form id="jobForm" class="dashboard-form">
+          <h3>Informasi lowongan</h3>
+          <label for="jobCompany">Perusahaan *</label>
+          <select id="jobCompany" required><option value="">Pilih perusahaan</option></select>
+          <label for="jobTitle">Jabatan *</label>
+          <input id="jobTitle" required maxlength="200" placeholder="Contoh: Frontend Developer">
+          <div class="form-row">
+            <div><label for="jobLocation">Lokasi</label><input id="jobLocation" maxlength="150" placeholder="Surakarta / Remote"></div>
+            <div><label for="jobCategory">Kategori</label><select id="jobCategory"><option value="">Tanpa kategori</option></select></div>
+          </div>
+          <div class="form-row">
+            <div><label for="jobType">Tipe pekerjaan</label><select id="jobType"><option>Full-time</option><option>Part-time</option><option>Kontrak</option><option>Magang</option><option>Freelance</option></select></div>
+            <div><label for="workplaceType">Sistem kerja</label><select id="workplaceType"><option value="On-site">On-site</option><option value="Hybrid">Hybrid</option><option value="Remote">Remote</option></select></div>
+          </div>
+          <div class="form-row">
+            <div><label for="salaryMin">Gaji minimum (Rp/bulan)</label><input id="salaryMin" type="number" min="0" step="100000" placeholder="4000000"></div>
+            <div><label for="salaryMax">Gaji maksimum (Rp/bulan)</label><input id="salaryMax" type="number" min="0" step="100000" placeholder="7000000"></div>
+          </div>
+          <label for="jobDescription">Deskripsi pekerjaan *</label>
+          <textarea id="jobDescription" required rows="5" maxlength="10000" placeholder="Jelaskan pekerjaan dan tanggung jawab utama..."></textarea>
+          <label for="jobRequirements">Persyaratan</label>
+          <textarea id="jobRequirements" rows="3" maxlength="5000" placeholder="Keahlian, pendidikan, dan pengalaman yang dibutuhkan"></textarea>
+          <label for="jobResponsibilities">Tanggung jawab</label>
+          <textarea id="jobResponsibilities" rows="3" maxlength="5000" placeholder="Daftar tanggung jawab pekerjaan"></textarea>
+          <label class="checkbox-line"><input id="jobIsActive" type="checkbox" checked> Publikasikan lowongan sebagai aktif</label>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Publikasikan lowongan</button></div>
+        </form>
+        <h2 class="list-heading">Lowongan saya</h2>
+        <div id="recruiterJobsList" class="jobs-list"></div>
+      </section>
 
-    <footer class="dashboard-footer">
-        &copy; 2026 KerjaKita. Temukan peluang, bangun masa depan.
-    </footer>
+      <section class="dashboard-section">
+        <h2 class="list-heading">Lamaran yang masuk</h2>
+        <div id="recruiterApplicationsList" class="jobs-list"></div>
+      </section>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase.js"></script>
-    <script src="dashboard.js"></script>
+    <a href="index.html" class="back-link">&larr; Kembali ke halaman utama</a>
+  </main>
+  <footer class="dashboard-footer">&copy; 2026 KerjaKita. Temukan peluang, bangun masa depan.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
