@@ -4,7 +4,7 @@ async function initializeDashboard() {
     try {
         // 1. Pastikan pengguna sudah login
         const { data: auth, error: authError } =
-            await supabase.auth.getUser();
+            await supabaseClient.auth.getUser();
 
         if (authError) throw authError;
 
@@ -16,7 +16,7 @@ async function initializeDashboard() {
         const user = auth.user;
 
         // 2. Ambil profil pengguna
-        const { data: profile, error: profileError } = await supabase
+        const { data: profile, error: profileError } = await supabaseClient
             .from("profiles")
             .select("*")
             .eq("id", user.id)
@@ -106,7 +106,7 @@ function escapeDashboardHTML(value) {
 // ==========================================
 
 async function loadApplicantDashboard(userId) {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from("applications")
         .select("*")
         .eq("applicant_id", userId)
@@ -172,7 +172,7 @@ async function loadApplicantDashboard(userId) {
 // ==========================================
 
 async function loadRecruiterDashboard(userId) {
-    const { data: companies, error: companyError } = await supabase
+    const { data: companies, error: companyError } = await supabaseClient
         .from("companies")
         .select("id, name")
         .eq("recruiter_id", userId);
@@ -203,7 +203,7 @@ async function loadRecruiterDashboard(userId) {
         return;
     }
 
-    const { data: jobs, error: jobsError } = await supabase
+    const { data: jobs, error: jobsError } = await supabaseClient
         .from("jobs")
         .select("*")
         .in("company_id", companyIds)
@@ -223,7 +223,7 @@ async function loadRecruiterDashboard(userId) {
     let applications = [];
 
     if (jobIds.length > 0) {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from("applications")
             .select("*")
             .in("job_id", jobIds)
@@ -325,7 +325,7 @@ async function updateApplicationStatus(applicationId, newStatus) {
         return;
     }
 
-    const { data: auth, error: authError } = await supabase.auth.getUser();
+    const { data: auth, error: authError } = await supabaseClient.auth.getUser();
 
     if (authError) {
         showDashboardError(authError.message);
@@ -337,7 +337,7 @@ async function updateApplicationStatus(applicationId, newStatus) {
         return;
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from("applications")
         .update({
             status: newStatus,
@@ -367,7 +367,7 @@ async function updateApplicationStatus(applicationId, newStatus) {
 // ==========================================
 
 async function logout() {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await supabaseClient.auth.signOut();
 
     if (error) {
         showDashboardError("Logout gagal: " + error.message);
