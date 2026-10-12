@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KerjaKita - Portal Lowongan Kerja</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <!-- ========================================= -->
+    <!-- NAVBAR -->
+    <!-- ========================================= -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="#" class="logo">
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </span>
+
+                <span>
+                    Kerja<span>Kita</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav-menu">
+
+                <a href="#lowongan">
+                    Cari Lowongan
+                </a>
+
+                <a href="#kategori">
+                    Kategori
+                </a>
+
+                <a href="#tentang">
+                    Tentang Kami
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-outline"
+                    id="loginBtn"
+                >
+                    Masuk
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="registerBtn"
+                >
+                    Daftar
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ========================================= -->
+    <!-- MAIN -->
+    <!-- ========================================= -->
+
+    <main>
+
+
+        <!-- ========================================= -->
+        <!-- HERO -->
+        <!-- ========================================= -->
+
+        <section class="hero">
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <div class="hero-badge">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Temukan pekerjaan impianmu
+
+                    </div>
+
+
+                    <h1>
+
+                        Temukan Karier
+
+                        <span>
+                            Terbaikmu
+                        </span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Cari ribuan lowongan kerja dari perusahaan
+                        terbaik dan temukan peluang karier yang sesuai
+                        dengan kemampuanmu.
+
+                    </p>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- SEARCH BOX -->
+                <!-- ================================= -->
+
+                <div class="search-box">
+
+                    <div class="search-input">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Jabatan, keahlian, atau kata kunci..."
+                        >
+
+                    </div>
+
+
+                    <div class="search-input">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <select id="locationFilter">
+
+                            <option value="">
+                                Semua Lokasi
+                            </option>
+
+                            <option value="Surakarta">
+                                Surakarta
+                            </option>
+
+                            <option value="Yogyakarta">
+                                Yogyakarta
+                            </option>
+
+                            <option value="Jakarta">
+                                Jakarta
+                            </option>
+
+                            <option value="Bandung">
+                                Bandung
+                            </option>
+
+                            <option value="Semarang">
+                                Semarang
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="search-button"
+                        id="searchButton"
+                    >
+
+                        Cari Lowongan
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================= -->
+        <!-- STATISTICS -->
+        <!-- ========================================= -->
+
+        <section class="statistics">
+
+            <div class="container stats-grid">
+
+
+                <div class="stat-item">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            1,250+
+                        </strong>
+
+                        <span>
+                            Lowongan Aktif
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            480+
+                        </strong>
+
+                        <span>
+                            Perusahaan
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            8,500+
+                        </strong>
+
+                        <span>
+                            Pencari Kerja
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-item">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            2,100+
+                        </strong>
+
+                        <span>
+                            Berhasil Ditempatkan
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================= -->
+        <!-- JOB SECTION -->
+        <!-- ========================================= -->
+
+        <section
+            class="jobs-section"
+            id="lowongan"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            LOWONGAN TERBARU
+                        </span>
+
+                        <h2>
+                            Peluang Karier Terbaik
+                        </h2>
+
+                        <p>
+                            Temukan pekerjaan yang sesuai dengan
+                            keahlian dan tujuan kariermu.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="view-all"
+                    >
+
+                        Lihat Semua
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- JOB CARDS -->
+                <!-- ================================= -->
+
+                <div
+                    class="jobs-grid"
+                    id="jobList"
+                >
+
+
+                    <!-- JOB 1 -->
+
+                    <article
+                        class="job-card"
+                        data-title="Frontend Developer"
+                        data-category="Teknologi"
+                        data-location="Surakarta"
+                    >
+
+                        <div class="job-card-top">
+
+                            <div class="company-logo">
+
+                                <i class="fa-solid fa-code"></i>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="bookmark"
+                                aria-label="Bookmark lowongan"
+                            >
+
+                                <i class="fa-regular fa-bookmark"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <span class="job-type">
+                            Full Time
+                        </span>
+
+
+                        <h3>
+                            Frontend Developer
+                        </h3>
+
+
+                        <p class="company-name">
+                            TechNusa Indonesia
+                        </p>
+
+
+                        <div class="job-info">
+
+                            <span>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                Surakarta
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fa-solid fa-money-bill"></i>
+
+                                Rp 5 - 8 Juta
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="job-tags">
+
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+
+                        </div>
+
+
+                        <div class="job-footer">
+
+                            <span class="job-time">
+                                2 hari lalu
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="apply-btn"
+                            >
+                                Lihat Detail
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- JOB 2 -->
+
+                    <article
+                        class="job-card"
+                        data-title="UI UX Designer"
+                        data-category="Desain"
+                        data-location="Yogyakarta"
+                    >
+
+                        <div class="job-card-top">
+
+                            <div class="company-logo design-logo">
+
+                                <i class="fa-solid fa-palette"></i>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="bookmark"
+                                aria-label="Bookmark lowongan"
+                            >
+
+                                <i class="fa-regular fa-bookmark"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <span class="job-type">
+                            Full Time
+                        </span>
+
+
+                        <h3>
+                            UI/UX Designer
+                        </h3>
+
+
+                        <p class="company-name">
+                            Kreatif Digital Studio
+                        </p>
+
+
+                        <div class="job-info">
+
+                            <span>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                Yogyakarta
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fa-solid fa-money-bill"></i>
+
+                                Rp 4 - 7 Juta
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="job-tags">
+
+                            <span>Figma</span>
+                            <span>UI Design</span>
+                            <span>UX</span>
+
+                        </div>
+
+
+                        <div class="job-footer">
+
+                            <span class="job-time">
+                                3 hari lalu
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="apply-btn"
+                            >
+                                Lihat Detail
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- JOB 3 -->
+
+                    <article
+                        class="job-card"
+                        data-title="Marketing Specialist"
+                        data-category="Marketing"
+                        data-location="Jakarta"
+                    >
+
+                        <div class="job-card-top">
+
+                            <div class="company-logo marketing-logo">
+
+                                <i class="fa-solid fa-bullhorn"></i>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="bookmark"
+                                aria-label="Bookmark lowongan"
+                            >
+
+                                <i class="fa-regular fa-bookmark"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <span class="job-type">
+                            Full Time
+                        </span>
+
+
+                        <h3>
+                            Marketing Specialist
+                        </h3>
+
+
+                        <p class="company-name">
+                            Nusantara Creative
+                        </p>
+
+
+                        <div class="job-info">
+
+                            <span>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                Jakarta
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fa-solid fa-money-bill"></i>
+
+                                Rp 6 - 9 Juta
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="job-tags">
+
+                            <span>Marketing</span>
+                            <span>SEO</span>
+                            <span>Social Media</span>
+
+                        </div>
+
+
+                        <div class="job-footer">
+
+                            <span class="job-time">
+                                4 hari lalu
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="apply-btn"
+                            >
+                                Lihat Detail
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- JOB 4 -->
+
+                    <article
+                        class="job-card"
+                        data-title="Backend Developer"
+                        data-category="Teknologi"
+                        data-location="Bandung"
+                    >
+
+                        <div class="job-card-top">
+
+                            <div class="company-logo backend-logo">
+
+                                <i class="fa-solid fa-server"></i>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="bookmark"
+                                aria-label="Bookmark lowongan"
+                            >
+
+                                <i class="fa-regular fa-bookmark"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <span class="job-type">
+                            Full Time
+                        </span>
+
+
+                        <h3>
+                            Backend Developer
+                        </h3>
+
+
+                        <p class="company-name">
+                            DigitalWorks
+                        </p>
+
+
+                        <div class="job-info">
+
+                            <span>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                Bandung
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="fa-solid fa-money-bill"></i>
+
+                                Rp 7 - 11 Juta
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="job-tags">
+
+                            <span>PHP</span>
+                            <span>Laravel</span>
+                            <span>MySQL</span>
+
+                        </div>
+
+
+                        <div class="job-footer">
+
+                            <span class="job-time">
+                                5 hari lalu
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="apply-btn"
+                            >
+                                Lihat Detail
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================= -->
+        <!-- CATEGORY -->
+        <!-- ========================================= -->
+
+        <section
+            class="category-section"
+            id="kategori"
+        >
+
+            <div class="container">
+
+                <div class="section-header centered">
+
+                    <span class="section-label">
+                        EXPLORE
+                    </span>
+
+                    <h2>
+                        Cari Berdasarkan Kategori
+                    </h2>
+
+                    <p>
+                        Temukan peluang kerja berdasarkan bidang
+                        yang kamu minati.
+                    </p>
+
+                </div>
+
+
+                <div class="category-grid">
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+
+                            <i class="fa-solid fa-laptop-code"></i>
+
+                        </div>
+
+                        <h3>
+                            Teknologi
+                        </h3>
+
+                        <p>
+                            320 Lowongan
+                        </p>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+
+                            <i class="fa-solid fa-pen-ruler"></i>
+
+                        </div>
+
+                        <h3>
+                            Desain
+                        </h3>
+
+                        <p>
+                            180 Lowongan
+                        </p>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                        </div>
+
+                        <h3>
+                            Marketing
+                        </h3>
+
+                        <p>
+                            215 Lowongan
+                        </p>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+
+                            <i class="fa-solid fa-calculator"></i>
+
+                        </div>
+
+                        <h3>
+                            Keuangan
+                        </h3>
+
+                        <p>
+                            150 Lowongan
+                        </p>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+
+                            <i class="fa-solid fa-headset"></i>
+
+                        </div>
+
+                        <h3>
+                            Customer Service
+                        </h3>
+
+                        <p>
+                            125 Lowongan
+                        </p>
+
+                    </div>
+
+
+                    <div class="category-card">
+
+                        <div class="category-icon">
+
+                            <i class="fa-solid fa-gears"></i>
+
+                        </div>
+
+                        <h3>
+                            Engineering
+                        </h3>
+
+                        <p>
+                            160 Lowongan
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================= -->
+        <!-- CTA -->
+        <!-- ========================================= -->
+
+        <section class="cta-section">
+
+            <div class="container">
+
+                <div class="cta-box">
+
+                    <div>
+
+                        <span>
+                            UNTUK PERUSAHAAN
+                        </span>
+
+                        <h2>
+                            Temukan Talenta Terbaik
+                            untuk Perusahaanmu
+                        </h2>
+
+                        <p>
+                            Publikasikan lowongan pekerjaan dan
+                            temukan kandidat terbaik untuk tim kamu.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-white"
+                        id="postJobBtn"
+                    >
+
+                        Pasang Lowongan
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================= -->
+
+    <footer id="tentang">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-about">
+
+                <a href="#" class="logo">
+
+                    <span class="logo-icon">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </span>
+
+
+                    <span>
+                        Kerja<span>Kita</span>
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Platform pencarian kerja yang membantu
+                    menghubungkan pencari kerja dengan perusahaan
+                    terbaik di Indonesia.
+
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Untuk Pencari Kerja
+                </h4>
+
+                <a href="#lowongan">
+                    Cari Lowongan
+                </a>
+
+                <a href="#kategori">
+                    Kategori Pekerjaan
+                </a>
+
+                <a href="#">
+                    Tips Karier
+                </a>
+
+                <a href="#">
+                    Bantuan
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Untuk Perusahaan
+                </h4>
+
+                <a href="#lowongan">
+                    Pasang Lowongan
+                </a>
+
+                <a href="#">
+                    Cari Kandidat
+                </a>
+
+                <a href="#">
+                    Harga
+                </a>
+
+                <a href="#">
+                    Bantuan Recruiter
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Ikuti Kami
+                </h4>
+
+
+                <div class="social-icons">
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 KerjaKita. All rights reserved.
+                </p>
+
+                <p>
+                    Project UAS/UTS Sistem Informasi
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ========================================= -->
+    <!-- AUTH MODAL -->
+    <!-- ========================================= -->
+
+    <div
+        class="auth-modal"
+        id="authModal"
+    >
+
+        <div
+            class="auth-modal-overlay"
+            id="authModalOverlay"
+        ></div>
+
+
+        <div class="auth-modal-content">
+
+
+            <!-- CLOSE -->
+
+            <button
+                type="button"
+                class="auth-close"
+                id="authClose"
+                aria-label="Tutup"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+            <!-- ================================= -->
+            <!-- LOGIN -->
+            <!-- ================================= -->
+
+            <div id="loginFormContainer">
+
+                <div class="auth-header">
+
+                    <div class="auth-icon">
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Selamat Datang Kembali
+                    </h2>
+
+
+                    <p>
+                        Masuk ke akun KerjaKita kamu
+                    </p>
+
+                </div>
+
+
+                <form id="loginForm">
+
+
+                    <div class="auth-field">
+
+                        <label for="loginEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="nama@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-field">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Masukkan password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary auth-submit"
+                    >
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        Masuk
+
+                    </button>
+
+
+                    <div
+                        class="auth-message"
+                        id="loginMessage"
+                        role="alert"
+                    ></div>
+
+                </form>
+
+
+                <p class="auth-switch">
+
+                    Belum punya akun?
+
+                    <button
+                        type="button"
+                        id="showRegisterBtn"
+                    >
+                        Daftar sekarang
+                    </button>
+
+                </p>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- REGISTER -->
+            <!-- ================================= -->
+
+            <div
+                id="registerFormContainer"
+                style="display: none;"
+            >
+
+                <div class="auth-header">
+
+                    <div class="auth-icon">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Buat Akun Baru
+                    </h2>
+
+
+                    <p>
+                        Bergabung dengan KerjaKita
+                    </p>
+
+                </div>
+
+
+                <form id="registerForm">
+
+
+                    <div class="auth-field">
+
+                        <label for="registerName">
+                            Nama Lengkap
+                        </label>
+
+                        <input
+                            type="text"
+                            id="registerName"
+                            placeholder="Nama lengkap"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-field">
+
+                        <label for="registerEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            placeholder="nama@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-field">
+
+                        <label for="registerPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            placeholder="Minimal 6 karakter"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-field">
+
+                        <label for="registerRole">
+                            Saya mendaftar sebagai
+                        </label>
+
+
+                        <select
+                            id="registerRole"
+                            required
+                        >
+
+                            <option value="">
+                                Pilih role
+                            </option>
+
+                            <option value="job_seeker">
+                                Job Seeker — Pencari Kerja
+                            </option>
+
+                            <option value="recruiter">
+                                Recruiter — Perusahaan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary auth-submit"
+                    >
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Buat Akun
+
+                    </button>
+
+
+                    <div
+                        class="auth-message"
+                        id="registerMessage"
+                        role="alert"
+                    ></div>
+
+                </form>
+
+
+                <p class="auth-switch">
+
+                    Sudah punya akun?
+
+                    <button
+                        type="button"
+                        id="showLoginBtn"
+                    >
+                        Masuk sekarang
+                    </button>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- SUPABASE -->
+    <!-- ========================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

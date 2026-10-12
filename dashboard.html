@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | KerjaKita</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <header class="dashboard-nav">
+        <a href="index.html" class="brand">Kerja<span>Kita</span></a>
+        <div class="nav-actions">
+            <span id="userName">Memuat akun...</span>
+            <button id="logoutBtn" class="btn btn-outline" type="button">
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="welcome">
+            <p class="eyebrow">DASHBOARD KERJAKITA</p>
+            <h1 id="welcomeTitle">Memuat dashboard...</h1>
+            <p id="welcomeDescription">
+                Sedang mengambil data akun Anda.
+            </p>
+        </section>
+
+        <div id="dashboardMessage" class="message" role="status" hidden></div>
+
+        <section class="profile-card">
+            <div class="avatar" id="userInitial">K</div>
+            <div>
+                <h2 id="profileName">Memuat profil...</h2>
+                <p id="profileEmail">-</p>
+                <span id="profileRole" class="role-badge">-</span>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Menu utama</h2>
+            <div id="dashboardMenu" class="dashboard-grid"></div>
+        </section>
+
+        <a href="index.html" class="back-link">
+            ← Kembali ke halaman utama
+        </a>
+    </main>
+
+    <footer class="dashboard-footer">
+        &copy; 2026 KerjaKita. Temukan peluang, bangun masa depan.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
