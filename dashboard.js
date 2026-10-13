@@ -169,8 +169,43 @@ function renderCompanies() {
     '<article class="job-management-card"><h3>' + dashEscape(c.company_name || c.name || "Perusahaan") +
     '</h3><p>' + dashEscape(c.location || "Lokasi belum diisi") + '</p>' +
     (c.logo_url ? '<p><a href="' + dashEscape(c.logo_url) + '" target="_blank" rel="noopener noreferrer">Lihat logo</a></p>' : '') +
+    '<div class="job-management-actions"><button type="button" class="btn btn-danger" data-delete-company="' + dashEscape(c.id) + '">Hapus perusahaan</button></div>' +
     '</article>').join("") :
     '<article class="job-management-card"><p>Belum ada perusahaan. Tambahkan profil perusahaan sebelum membuat lowongan.</p></article>';
+
+  list.querySelectorAll("[data-delete-company]").forEach(button => button.addEventListener("click", async () => {
+    const companyId = button.dataset.deleteCompany;
+    const company = recruiterCompanies.find(c => String(c.id) === String(companyId));
+    if (!company) {
+      dashMessage("Perusahaan tidak ditemukan. Muat ulang dashboard lalu coba lagi.");
+      return;
+    }
+    if (!confirm('Yakin ingin menghapus perusahaan "' + (company.company_name || company.name || "Perusahaan") + '"? Tindakan ini tidak dapat dibatalkan.')) return;
+
+    button.disabled = true;
+    try {
+      // Jangan menghapus perusahaan yang masih memiliki lowongan agar data lowongan/lamaran tidak ikut terdampak.
+      const {data: jobs, error: jobsError} = await supabaseClient.from("jobs")
+        .select("id").eq("company_id", companyId).limit(1);
+      if (jobsError) throw jobsError;
+      if (jobs && jobs.length) {
+        throw new Error("Perusahaan ini masih memiliki lowongan. Hapus semua lowongan milik perusahaan ini terlebih dahulu, lalu coba hapus perusahaannya lagi.");
+      }
+
+      const {data, error} = await supabaseClient.from("companies").delete()
+        .eq("id", companyId).eq("recruiter_id", dashboardUser.id).select("id");
+      if (error) throw error;
+      if (!data || !data.length) {
+        throw new Error("Perusahaan tidak terhapus. Periksa kebijakan RLS DELETE pada tabel companies.");
+      }
+      dashMessage("Perusahaan berhasil dihapus.", "success");
+      await loadRecruiterDashboard();
+    } catch (error) {
+      dashMessage("Gagal menghapus perusahaan: " + (error.message || "Terjadi kesalahan."));
+    } finally {
+      button.disabled = false;
+    }
+  }));
 }
 
 async function loadCategories() {
