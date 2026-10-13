@@ -147,8 +147,11 @@ select {
 .user-info {
     display: flex;
     align-items: center;
-    gap: 8px;
-
+    justify-content: flex-end;
+    gap: 14px;
+    margin-left: auto;
+    flex: 0 0 auto;
+    max-width: 100%;
     color: #334155;
     font-size: 14px;
 }
@@ -166,8 +169,36 @@ select {
 
 .user-info strong {
     display: block;
+    max-width: 240px;
     color: var(--dark);
     font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.dashboard-nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 15px;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background-color .2s, border-color .2s;
+}
+
+.dashboard-nav-link:hover {
+    border-color: var(--primary-dark);
+    background: var(--primary-dark);
+    color: #fff;
+}
+
+.user-info .btn {
+    white-space: nowrap;
 }
 
 
@@ -1801,7 +1832,56 @@ body.modal-open {
     }
 }
 
+@media (max-width: 768px) {
+    .nav-container {
+        justify-content: space-between;
+    }
+
+    .nav-container > .nav-menu {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 20px;
+    }
+
+    .nav-container > .user-info,
+    .nav-container > .nav-actions .user-info {
+        margin-left: auto;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .user-info strong {
+        max-width: 180px;
+        font-size: 12px;
+    }
+
+    .dashboard-nav-link {
+        min-height: 36px;
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+}
+
 @media (max-width: 420px) {
+    .user-info {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 7px;
+    }
+
+    .user-info strong {
+        max-width: 125px;
+    }
+
+    .user-info .btn,
+    .dashboard-nav-link {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
     .container {
         width: calc(100% - 24px);
     }
