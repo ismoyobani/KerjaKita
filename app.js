@@ -266,6 +266,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!currentUser) {
             if (loginButton) loginButton.style.display = "";
             if (registerButton) registerButton.style.display = "";
+            const navActions = document.querySelector(".navbar .nav-actions");
+            if (navActions) navActions.style.display = "";
             existingInfo?.remove();
             return;
         }
@@ -286,10 +288,11 @@ document.addEventListener("DOMContentLoaded", () => {
             userInfo.id = "userInfo";
             userInfo.className = "user-info";
 
-            const navbar = document.querySelector(
-                ".navbar .nav-actions, .navbar .nav-buttons, .navbar"
-            );
+            const navbar = document.querySelector(".navbar .nav-container");
+            const navActions = document.querySelector(".navbar .nav-actions");
 
+            // Pisahkan info akun dari tombol Masuk/Daftar agar layout navbar rapi.
+            if (navActions) navActions.style.display = "none";
             navbar?.appendChild(userInfo);
         }
 
