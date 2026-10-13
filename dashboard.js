@@ -353,7 +353,7 @@ function bindRecruiterForms() {
       const job = {
         company_id:companyId, title, description,
         location:$dash("jobLocation").value.trim() || null,
-        job_type:$dash("jobType").value,
+        job_type:String($dash("jobType").value || "").trim().toLowerCase(),
         workplace_type:$dash("workplaceType").value,
         salary_min, salary_max,
         requirements:$dash("jobRequirements").value.trim() || null,
