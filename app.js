@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentUser = null;
     let currentProfile = null;
     let publicJobs = [];
+    let categoryOverride = null;
 
     // ==========================================
     // UTILITAS
@@ -419,6 +420,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     Isi surat lamaran dan tautan CV jika tersedia.
                 </p>
 
+                <div class="application-category-field">
+                    <span class="application-category-label">Kategori pekerjaan</span>
+                    <strong id="applicationCategory">${escapeHTML(category)}</strong>
+                    <small>Kategori mengikuti lowongan yang sedang kamu lamar.</small>
+                </div>
+
                 <label for="applicationCoverLetter">Surat lamaran</label>
                 <textarea id="applicationCoverLetter" rows="5"
                     placeholder="Tuliskan alasan dan kualifikasi kamu..."
@@ -637,7 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function applyJobFilters() {
         const location = (locationFilter?.value || "").toLowerCase().trim();
         const selectedCategory =
-            (categoryFilter?.value || "").toLowerCase().trim();
+            (categoryOverride ?? categoryFilter?.value ?? "").toLowerCase().trim();
 
         const filteredJobs = publicJobs.filter((job) => {
             const jobLocation = (job.location || "").toLowerCase();
@@ -799,7 +806,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mengubah filter tanpa perlu melakukan query baru.
     locationFilter?.addEventListener("change", applyJobFilters);
-    categoryFilter?.addEventListener("change", applyJobFilters);
+    categoryFilter?.addEventListener("change", () => {
+        categoryOverride = null;
+        applyJobFilters();
+    });
+
+    // Kartu kategori di halaman utama menjadi pintasan filter lowongan.
+    function selectCategoryFromCard(card) {
+        const name = (card.dataset.categoryFilter || card.querySelector("h3")?.textContent || "").trim().toLowerCase();
+        if (!name) return;
+        categoryOverride = name;
+        if (categoryFilter) {
+            const option = Array.from(categoryFilter.options).find(item => item.textContent.trim().toLowerCase() === name);
+            categoryFilter.value = option ? option.value : "";
+        }
+        applyJobFilters();
+        $("lowongan")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    document.querySelectorAll(".category-card").forEach(card => {
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", "Cari lowongan kategori " + (card.querySelector("h3")?.textContent.trim() || ""));
+        card.addEventListener("click", () => selectCategoryFromCard(card));
+        card.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                selectCategoryFromCard(card);
+            }
+        });
+    });
 
     // ==========================================
     // BOOKMARK SEMENTARA
