@@ -273,7 +273,9 @@ function renderRecruiterApplications(applications) {
 
 function bindRecruiterForms() {
   $dash("companyForm")?.addEventListener("submit", async event => {
-    event.preventDefault(); clearDashMessage();
+    event.preventDefault();
+    const form = event.currentTarget;
+    clearDashMessage();
     const button = event.currentTarget.querySelector('button[type="submit"]');
     button.disabled = true;
     try {
@@ -285,7 +287,7 @@ function bindRecruiterForms() {
         recruiter_id:dashboardUser.id, company_name:companyName, location, logo_url:logoUrl
       });
       if (error) throw error;
-      event.currentTarget.reset();
+      form.reset();
       dashMessage("Profil perusahaan berhasil disimpan.", "success");
       await loadRecruiterDashboard();
     } catch (error) { dashMessage("Gagal menyimpan perusahaan: " + error.message); }
@@ -293,7 +295,9 @@ function bindRecruiterForms() {
   });
 
   $dash("jobForm")?.addEventListener("submit", async event => {
-    event.preventDefault(); clearDashMessage();
+    event.preventDefault();
+    const form = event.currentTarget;
+    clearDashMessage();
     const button = event.currentTarget.querySelector('button[type="submit"]');
     button.disabled = true;
     try {
@@ -321,7 +325,7 @@ function bindRecruiterForms() {
       if (categoryId) job.category_id = categoryId;
       const {error} = await supabaseClient.from("jobs").insert(job);
       if (error) throw error;
-      event.currentTarget.reset();
+      form.reset();
       $dash("jobIsActive").checked = true;
       dashMessage("Lowongan berhasil dipublikasikan.", "success");
       await loadRecruiterDashboard();
