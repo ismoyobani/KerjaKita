@@ -493,3 +493,215 @@ button:disabled {
 .dashboard-form button:focus-visible, .dashboard-nav button:focus-visible,
 .job-management-actions button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
 @media (max-width: 900px) { .search-box { grid-template-columns: 1fr; } }
+
+
+/* ==================================================
+   MOBILE LAYOUT PATCH — dashboard
+   Desktop layout remains unchanged.
+================================================== */
+@media (max-width: 768px) {
+    html, body {
+        max-width: 100%;
+        overflow-x: clip;
+    }
+
+    .dashboard-nav {
+        min-height: 0;
+        padding: 14px 5%;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+    .nav-actions {
+        max-width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    #userName {
+        max-width: min(48vw, 220px);
+        overflow-wrap: anywhere;
+        text-align: right;
+        font-size: 12px;
+    }
+
+    .dashboard-container {
+        width: min(100% - 28px, 620px);
+        margin: 24px auto 32px;
+    }
+
+    .welcome h1 {
+        font-size: clamp(25px, 7vw, 34px);
+        overflow-wrap: anywhere;
+    }
+
+    .welcome p:last-child {
+        font-size: 14px;
+    }
+
+    .profile-card {
+        align-items: flex-start;
+        gap: 13px;
+        padding: 17px;
+        margin-bottom: 28px;
+        min-width: 0;
+    }
+
+    .profile-card > div:last-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .profile-card h2 {
+        font-size: 18px;
+        overflow-wrap: anywhere;
+    }
+
+    .profile-card p {
+        font-size: 13px;
+        overflow-wrap: anywhere;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .menu-card {
+        min-width: 0;
+        min-height: 0;
+        padding: 16px;
+        overflow-wrap: anywhere;
+    }
+
+    .menu-card h3 {
+        font-size: 21px;
+    }
+
+    .menu-card p {
+        font-size: 12px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .dashboard-section {
+        margin-top: 30px;
+    }
+
+    .dashboard-form {
+        min-width: 0;
+        padding: 16px;
+        gap: 9px;
+    }
+
+    .dashboard-form h3 {
+        font-size: 17px;
+    }
+
+    .dashboard-form label {
+        overflow-wrap: anywhere;
+    }
+
+    .dashboard-form input:not([type="checkbox"]),
+    .dashboard-form select,
+    .dashboard-form textarea {
+        min-width: 0;
+        font-size: 16px;
+    }
+
+    .form-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .form-actions,
+    .job-management-actions {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .form-actions .btn,
+    .job-management-actions .btn,
+    .job-management-actions button {
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    .job-management-card {
+        min-width: 0;
+        padding: 16px;
+    }
+
+    .job-management-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .job-management-header > * {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .job-status {
+        align-self: flex-start;
+    }
+
+    .back-link {
+        line-height: 1.5;
+    }
+
+    .dashboard-footer {
+        padding: 22px 14px;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 420px) {
+    .dashboard-nav {
+        align-items: flex-start;
+    }
+
+    .nav-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #userName {
+        max-width: calc(100% - 88px);
+        text-align: left;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .menu-card {
+        padding: 17px;
+    }
+
+    .profile-card {
+        padding: 14px;
+    }
+
+    .avatar {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+    }
+
+    .form-actions .btn,
+    .job-management-actions > button {
+        width: 100%;
+    }
+}
