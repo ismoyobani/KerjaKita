@@ -923,19 +923,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (error) throw error;
 
-            // Halaman awal menjadi gerbang login. Jika sesi masih aktif,
-            // langsung arahkan pengguna ke menu dashboard.
-            if (data.session?.user) {
-                window.location.replace("dashboard.html");
-                return;
-            }
+            // Tetap izinkan pengguna kembali ke halaman utama meskipun sudah login.
+            // Pengguna yang sudah login melihat homepage dengan menu akun;
+            // pengguna yang belum login langsung melihat modal login, tetapi
+            // masih bisa menutupnya untuk menjelajahi halaman utama.
+            await updateNavbar(data.session || null);
 
-            await updateNavbar(null);
-            openAuthModal("login");
+            if (!data.session?.user) {
+                openAuthModal("login");
+            }
         } catch (error) {
             console.error("Gagal memeriksa sesi:", error);
-            // Jika pemeriksaan sesi gagal, tetap tampilkan form login agar
-            // pengguna bisa mencoba masuk kembali.
+            // Jika pemeriksaan sesi gagal, homepage tetap bisa digunakan.
+            // Modal login ditampilkan sebagai opsi masuk.
+            await updateNavbar(null);
             openAuthModal("login");
         }
     }
