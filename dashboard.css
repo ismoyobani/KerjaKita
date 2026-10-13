@@ -705,3 +705,40 @@ button:disabled {
         width: 100%;
     }
 }
+
+
+/* Tombol aksi untuk membuka CV pelamar */
+.cv-action {
+    margin: 14px 0 4px;
+}
+
+.cv-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 10px 16px;
+    border-radius: 9px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.cv-link:hover {
+    color: var(--primary-dark);
+    background: #eff6ff;
+    transform: translateY(-1px);
+}
+
+.cv-link:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+@media (max-width: 420px) {
+    .cv-link {
+        width: 100%;
+    }
+}
