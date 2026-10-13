@@ -63,6 +63,9 @@
           <h3>Tambah perusahaan</h3>
           <label for="companyName">Nama perusahaan *</label>
           <input id="companyName" name="company_name" required maxlength="150" placeholder="Contoh: PT Teknologi Nusantara">
+          <label for="companyEmail">Email kontak perusahaan *</label>
+          <input id="companyEmail" name="contact_email" type="email" required maxlength="254" placeholder="hr@perusahaan.com">
+          <small class="section-note">Email ini akan ditampilkan kepada pelamar setelah lamaran diterima. Tombol kontak akan membuka Gmail dengan alamat tujuan terisi.</small>
           <div class="form-row">
             <div><label for="companyLocation">Lokasi</label><input id="companyLocation" name="location" maxlength="150" placeholder="Surakarta, Jawa Tengah"></div>
             <div><label for="companyLogo">URL logo (opsional)</label><input id="companyLogo" name="logo_url" type="url" maxlength="1000" placeholder="https://..."></div>
