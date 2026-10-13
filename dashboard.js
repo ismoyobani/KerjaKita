@@ -368,7 +368,15 @@ function bindRecruiterForms() {
       $dash("jobIsActive").checked = true;
       dashMessage("Lowongan berhasil dipublikasikan.", "success");
       await loadRecruiterDashboard();
-    } catch (error) { dashMessage("Gagal membuat lowongan: " + error.message); }
+    } catch (error) {
+      console.error("Gagal membuat lowongan:", error);
+      const message = error?.message || "Terjadi kesalahan.";
+      if (error?.code === "23514" || /jobs_job_type_check|check constraint/i.test(message)) {
+        dashMessage("Gagal membuat lowongan: aturan job_type di database Supabase belum cocok dengan formulir. Jalankan SQL dari file supabase/fix_jobs_job_type_check.sql di Supabase SQL Editor, lalu coba lagi.");
+      } else {
+        dashMessage("Gagal membuat lowongan: " + message);
+      }
+    }
     finally { button.disabled = false; }
   });
 }
