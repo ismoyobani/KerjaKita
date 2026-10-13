@@ -135,7 +135,7 @@ async function loadRecruiterDashboard() {
   recruiterJobs = [];
   if (companyIds.length) {
     const {data: jobs, error: jobsError} = await supabaseClient.from("jobs")
-      .select("*").in("company_id", companyIds).order("created_at", {ascending:false});
+      .select("*,categories(name)").in("company_id", companyIds).order("created_at", {ascending:false});
     if (jobsError) throw jobsError;
     recruiterJobs = jobs || [];
   }
