@@ -1966,3 +1966,12 @@ body.modal-open {
         padding: 24px 15px 20px;
     }
 }
+
+
+/* Kartu kategori yang dapat dipilih untuk memfilter lowongan */
+.category-card[role="button"] { cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.category-card[role="button"]:hover, .category-card[role="button"]:focus-visible { transform: translateY(-3px); outline: none; box-shadow: 0 10px 24px rgba(37, 99, 235, .12); border-color: var(--primary); }
+.application-category-field { display: flex; flex-direction: column; gap: 5px; margin: 16px 0 20px; padding: 13px 14px; border: 1px solid #bfdbfe; border-radius: 10px; background: #eff6ff; }
+.application-category-label { color: #475569; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.application-category-field strong { color: #1d4ed8; font-size: 15px; }
+.application-category-field small, .application-category-summary { color: #64748b; font-size: 13px; }
