@@ -102,7 +102,7 @@ async function loadApplicantDashboard() {
   let jobsById = {};
   const jobIds = [...new Set(applications.map(a => a.job_id).filter(Boolean))];
   if (jobIds.length) {
-    const {data: jobs, error: jobsError} = await supabaseClient.from("jobs").select("id,title,location,job_type,companies(company_name)").in("id", jobIds);
+    const {data: jobs, error: jobsError} = await supabaseClient.from("jobs").select("id,title,location,job_type,companies(company_name),categories(name)").in("id", jobIds);
     if (!jobsError) (jobs || []).forEach(job => jobsById[String(job.id)] = job);
   }
   list.innerHTML = applications.map(app => {
@@ -112,7 +112,7 @@ async function loadApplicantDashboard() {
     return '<article class="job-management-card"><div class="job-management-header"><div><h3>' +
       dashEscape(job.title || ("Lamaran #" + app.id)) + '</h3><p>' +
       dashEscape(company.company_name || "Perusahaan") + " · " + dashEscape(job.location || "Lokasi tidak dicantumkan") +
-      '</p></div><span class="job-status ' + (status === "accepted" ? "active" : status === "rejected" ? "inactive" : "active") + '">' +
+      '</p><p class="application-category-summary">Kategori: ' + dashEscape(job.categories?.name || "Umum") + '</p></div><span class="job-status ' + (status === "accepted" ? "active" : status === "rejected" ? "inactive" : "active") + '">' +
       dashEscape(statusLabel(status)) + '</span></div><p>Tanggal melamar: ' + dashEscape(formatDashDate(app.created_at)) +
       '</p>' + (app.cover_letter ? '<p class="job-description">' + dashEscape(app.cover_letter) + '</p>' : '') +
       (app.cv_url ? '<p class="cv-action"><a class="btn btn-outline cv-link" href="' + dashEscape(app.cv_url) + '" target="_blank" rel="noopener noreferrer" aria-label="Buka CV pelamar di tab baru"><span aria-hidden="true">📄</span> Lihat CV Pelamar <span aria-hidden="true">↗</span></a></p>' : '') +
@@ -281,7 +281,7 @@ function renderRecruiterApplications(applications) {
     return '<article class="job-management-card"><div class="job-management-header"><div><h3>' +
       dashEscape(job.title || ("Lowongan #" + app.job_id)) + '</h3><p>Pelamar: ' +
       dashEscape(app.applicant_id || "Tidak tersedia") + ' · ' + dashEscape(formatDashDate(app.created_at)) +
-      '</p></div><span class="job-status ' + (status === "rejected" ? "inactive" : "active") + '">' +
+      '</p><p class="application-category-summary">Kategori: ' + dashEscape(job.categories?.name || "Umum") + '</p></div><span class="job-status ' + (status === "rejected" ? "inactive" : "active") + '">' +
       dashEscape(statusLabel(status)) + '</span></div>' +
       (app.cover_letter ? '<p class="job-description">' + dashEscape(app.cover_letter) + '</p>' : '') +
       (app.cv_url ? '<p class="cv-action"><a class="btn btn-outline cv-link" href="' + dashEscape(app.cv_url) + '" target="_blank" rel="noopener noreferrer" aria-label="Buka CV pelamar di tab baru"><span aria-hidden="true">📄</span> Lihat CV Pelamar <span aria-hidden="true">↗</span></a></p>' : '') +
