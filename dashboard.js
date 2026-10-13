@@ -102,7 +102,7 @@ async function loadApplicantDashboard() {
   let jobsById = {};
   const jobIds = [...new Set(applications.map(a => a.job_id).filter(Boolean))];
   if (jobIds.length) {
-    const {data: jobs, error: jobsError} = await supabaseClient.from("jobs").select("id,title,location,job_type,companies(company_name),categories(name)").in("id", jobIds);
+    const {data: jobs, error: jobsError} = await supabaseClient.from("jobs").select("id,title,location,job_type,companies(company_name,contact_email),categories(name)").in("id", jobIds);
     if (!jobsError) (jobs || []).forEach(job => jobsById[String(job.id)] = job);
   }
   list.innerHTML = applications.map(app => {
@@ -116,6 +116,7 @@ async function loadApplicantDashboard() {
       dashEscape(statusLabel(status)) + '</span></div><p>Tanggal melamar: ' + dashEscape(formatDashDate(app.created_at)) +
       '</p>' + (app.cover_letter ? '<p class="job-description">' + dashEscape(app.cover_letter) + '</p>' : '') +
       (app.cv_url ? '<p class="cv-action"><a class="btn btn-outline cv-link" href="' + dashEscape(app.cv_url) + '" target="_blank" rel="noopener noreferrer" aria-label="Buka CV pelamar di tab baru"><span aria-hidden="true">📄</span> Lihat CV Pelamar <span aria-hidden="true">↗</span></a></p>' : '') +
+      (status === "accepted" && company.contact_email ? '<p class="accepted-contact-note">🎉 Selamat! Lamaranmu diterima. Hubungi perusahaan untuk langkah selanjutnya:</p><p><a class="btn btn-primary contact-email-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=' + encodeURIComponent(company.contact_email) + '&amp;su=' + encodeURIComponent("Tindak Lanjut Lamaran - " + (job.title || "Lowongan Kerja")) + '&amp;body=' + encodeURIComponent("Yth. " + (company.company_name || "Tim Rekrutmen") + ",\\n\\nTerima kasih telah menerima lamaran saya untuk posisi " + (job.title || "lowongan tersebut") + ". Saya ingin menanyakan langkah selanjutnya dalam proses rekrutmen.\\n\\nHormat saya,\\n" + (dashboardProfile.full_name || dashboardUser.email || "Pelamar")) + '" target="_blank" rel="noopener noreferrer">✉ Hubungi Perusahaan via Gmail ↗</a></p>' : status === "accepted" ? '<p class="accepted-contact-note">🎉 Lamaranmu diterima. Email kontak perusahaan belum ditambahkan oleh perekrut.</p>' : '') +
       '</article>';
   }).join("");
 }
@@ -168,6 +169,7 @@ function renderCompanies() {
   list.innerHTML = recruiterCompanies.length ? recruiterCompanies.map(c =>
     '<article class="job-management-card"><h3>' + dashEscape(c.company_name || c.name || "Perusahaan") +
     '</h3><p>' + dashEscape(c.location || "Lokasi belum diisi") + '</p>' +
+    (c.contact_email ? '<p>Email kontak: <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=' + encodeURIComponent(c.contact_email) + '" target="_blank" rel="noopener noreferrer">' + dashEscape(c.contact_email) + '</a></p>' : '') +
     (c.logo_url ? '<p><a href="' + dashEscape(c.logo_url) + '" target="_blank" rel="noopener noreferrer">Lihat logo</a></p>' : '') +
     '<div class="job-management-actions"><button type="button" class="btn btn-danger" data-delete-company="' + dashEscape(c.id) + '">Hapus perusahaan</button></div>' +
     '</article>').join("") :
@@ -315,11 +317,13 @@ function bindRecruiterForms() {
     button.disabled = true;
     try {
       const companyName = $dash("companyName").value.trim();
+      const contactEmail = $dash("companyEmail").value.trim().toLowerCase();
       const location = $dash("companyLocation").value.trim() || null;
       const logoUrl = $dash("companyLogo").value.trim() || null;
       if (!companyName) throw new Error("Nama perusahaan wajib diisi.");
+      if (!contactEmail || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(contactEmail)) throw new Error("Masukkan email kontak perusahaan yang valid.");
       const {error} = await supabaseClient.from("companies").insert({
-        recruiter_id:dashboardUser.id, company_name:companyName, location, logo_url:logoUrl
+        recruiter_id:dashboardUser.id, company_name:companyName, contact_email:contactEmail, location, logo_url:logoUrl
       });
       if (error) throw error;
       form.reset();
