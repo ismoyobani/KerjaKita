@@ -115,7 +115,7 @@ async function loadApplicantDashboard() {
       '</p></div><span class="job-status ' + (status === "accepted" ? "active" : status === "rejected" ? "inactive" : "active") + '">' +
       dashEscape(statusLabel(status)) + '</span></div><p>Tanggal melamar: ' + dashEscape(formatDashDate(app.created_at)) +
       '</p>' + (app.cover_letter ? '<p class="job-description">' + dashEscape(app.cover_letter) + '</p>' : '') +
-      (app.cv_url ? '<p><a href="' + dashEscape(app.cv_url) + '" target="_blank" rel="noopener noreferrer">Buka CV</a></p>' : '') +
+      (app.cv_url ? '<p class="cv-action"><a class="btn btn-outline cv-link" href="' + dashEscape(app.cv_url) + '" target="_blank" rel="noopener noreferrer" aria-label="Buka CV pelamar di tab baru"><span aria-hidden="true">📄</span> Lihat CV Pelamar <span aria-hidden="true">↗</span></a></p>' : '') +
       '</article>';
   }).join("");
 }
@@ -249,7 +249,7 @@ function renderRecruiterApplications(applications) {
       '</p></div><span class="job-status ' + (status === "rejected" ? "inactive" : "active") + '">' +
       dashEscape(statusLabel(status)) + '</span></div>' +
       (app.cover_letter ? '<p class="job-description">' + dashEscape(app.cover_letter) + '</p>' : '') +
-      (app.cv_url ? '<p><a href="' + dashEscape(app.cv_url) + '" target="_blank" rel="noopener noreferrer">Buka CV</a></p>' : '') +
+      (app.cv_url ? '<p class="cv-action"><a class="btn btn-outline cv-link" href="' + dashEscape(app.cv_url) + '" target="_blank" rel="noopener noreferrer" aria-label="Buka CV pelamar di tab baru"><span aria-hidden="true">📄</span> Lihat CV Pelamar <span aria-hidden="true">↗</span></a></p>' : '') +
       '<div class="job-management-actions">' +
       '<button type="button" class="btn btn-outline" data-app-status="' + dashEscape(app.id) + '" data-status="reviewed">Tinjau</button>' +
       '<button type="button" class="btn btn-primary" data-app-status="' + dashEscape(app.id) + '" data-status="accepted">Terima</button>' +
