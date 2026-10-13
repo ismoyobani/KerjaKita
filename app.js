@@ -923,9 +923,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (error) throw error;
 
-            await updateNavbar(data.session);
+            // Halaman awal menjadi gerbang login. Jika sesi masih aktif,
+            // langsung arahkan pengguna ke menu dashboard.
+            if (data.session?.user) {
+                window.location.replace("dashboard.html");
+                return;
+            }
+
+            await updateNavbar(null);
+            openAuthModal("login");
         } catch (error) {
             console.error("Gagal memeriksa sesi:", error);
+            // Jika pemeriksaan sesi gagal, tetap tampilkan form login agar
+            // pengguna bisa mencoba masuk kembali.
+            openAuthModal("login");
         }
     }
 
