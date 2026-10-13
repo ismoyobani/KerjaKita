@@ -672,6 +672,43 @@ document.addEventListener("DOMContentLoaded", () => {
         renderJobs(filteredJobs);
     }
 
+    // Hitung lowongan aktif per kategori dari database, bukan angka statis.
+    async function loadCategoryCounts() {
+        const cards = Array.from(document.querySelectorAll(".category-card"));
+        if (!cards.length) return;
+
+        const countElements = cards.map(card => ({
+            name: (card.dataset.categoryFilter || card.querySelector("h3")?.textContent || "").trim().toLowerCase(),
+            count: card.querySelector(".category-count")
+        })).filter(item => item.name && item.count);
+
+        try {
+            const { data, error } = await supabaseClient
+                .from("jobs")
+                .select("categories(name)")
+                .eq("is_active", true);
+
+            if (error) throw error;
+
+            const counts = new Map();
+            (data || []).forEach(job => {
+                const relation = job.categories;
+                const category = Array.isArray(relation) ? relation[0] : relation;
+                const name = String(category?.name || "Umum").trim().toLowerCase();
+                counts.set(name, (counts.get(name) || 0) + 1);
+            });
+
+            countElements.forEach(item => {
+                item.count.textContent = String(counts.get(item.name) || 0);
+            });
+        } catch (error) {
+            console.warn("Jumlah lowongan per kategori tidak dapat dimuat:", error.message);
+            countElements.forEach(item => {
+                item.count.textContent = "—";
+            });
+        }
+    }
+
     // Isi opsi kategori dari database. Kegagalan kategori tidak memblokir lowongan.
     async function loadCategoryOptions() {
         if (!categoryFilter) return;
@@ -901,5 +938,6 @@ document.addEventListener("DOMContentLoaded", () => {
     createJobModal();
     initializeApp();
     loadCategoryOptions();
+    loadCategoryCounts();
     loadPublicJobs();
 });
