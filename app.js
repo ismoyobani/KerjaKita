@@ -303,6 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const dashboardLink = document.createElement("a");
         dashboardLink.href = "dashboard.html";
+        dashboardLink.className = "dashboard-nav-link";
         dashboardLink.textContent = "Dashboard";
 
         const logoutButton = document.createElement("button");
